@@ -2,3 +2,4 @@ start-dev.sh
 node_modules
 dist
 coverage
+globalConfig.json
