@@ -8,6 +8,10 @@ export class LoginController implements Controller {
       return badRequest(new MissingParamError('email'))
     }
 
+    if (!httpRequest.body?.password) {
+      return badRequest(new MissingParamError('password'))
+    }
+
     return null as unknown as HttpResponse
   }
 }
