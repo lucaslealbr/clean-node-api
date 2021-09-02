@@ -6,11 +6,14 @@ services:
     image: mongo:4
     restart: always
     volumes: 
-      - ./data:/data/db
+      - clean-node-api-mongo-db:/data/db
     ports: 
       - '27017:27017'
+    networks: 
+      - clean-node-api-network
   api:
     container_name: api-container
+    user: '1000'
     build: .
     image: clean-node-api
     restart: always
@@ -19,6 +22,11 @@ services:
       - ./dist:/usr/src/clean-node-api/dist
     ports: 
       - '5050:5050'
-    links: 
-      - mongo
-      
+    networks: 
+      - clean-node-api-network
+
+networks: 
+  clean-node-api-network:
+
+volumes: 
+  clean-node-api-mongo-db:
