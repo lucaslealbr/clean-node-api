@@ -13,12 +13,13 @@ services:
       - clean-node-api-network
   api:
     container_name: api-container
-    build: .
-    image: clean-node-api
+    image: node:16
     restart: always
-    command: npm start
+    user: '1000'
+    tty: true
+    working_dir: /usr/src/clean-node-api
     volumes: 
-      - ./dist:/usr/src/clean-node-api/dist
+      - ./:/usr/src/clean-node-api
     ports: 
       - '5050:5050'
     networks: 
