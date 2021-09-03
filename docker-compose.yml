@@ -13,7 +13,6 @@ services:
       - clean-node-api-network
   api:
     container_name: api-container
-    user: '1000'
     build: .
     image: clean-node-api
     restart: always

@@ -1,7 +1,16 @@
-FROM node:14
+FROM node:16
 
 WORKDIR /usr/src/clean-node-api
 
-COPY package.json .
+RUN mkdir temp
 
-RUN npm install --only=prod
+COPY . temp/
+
+RUN cd temp/ && \
+    npm install && \
+    npm run build && \
+    cd .. && \
+    mv temp/node_modules . && \
+    mv temp/dist . && \
+    mv temp/package.json . && \
+    rm -rf temp/
