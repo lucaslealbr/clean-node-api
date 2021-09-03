@@ -16,12 +16,13 @@ services:
     image: node:16
     restart: always
     user: '1000'
-    tty: true
+    command: npm run debug
     working_dir: /usr/src/clean-node-api
     volumes: 
       - ./:/usr/src/clean-node-api
     ports: 
       - '5050:5050'
+      - '9222:9222'
     networks: 
       - clean-node-api-network
 
