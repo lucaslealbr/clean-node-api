@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
-    "debug": "node --inspect=0.0.0.0:9222 --nolazy dist/main/server.js",
-    "dev": "sucrase-node src/main/server.ts",
+    "dev": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
@@ -38,6 +37,7 @@
     "husky": "^4.0.6",
     "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
+    "nodemon": "^2.0.12",
     "rimraf": "^3.0.2",
     "sucrase": "^3.18.2",
     "supertest": "^6.1.3",
