@@ -1,5 +1,5 @@
-import { ServerError } from '../../errors'
-import { ok, serverError } from '../../helpers/http/http-helper'
+import { EmailInUseError, ServerError } from '../../errors'
+import { forbidden, ok, serverError } from '../../helpers/http/http-helper'
 import { HttpRequest } from '../../protocols'
 import { SignUpController } from './signup-controller'
 import {
@@ -13,7 +13,7 @@ import {
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    async add (account: AddAccountModel): Promise<AccountModel> {
+    async add (account: AddAccountModel): Promise<AccountModel | null> {
       return await new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
@@ -103,6 +103,14 @@ describe('SignUp Controller', () => {
     const httpResponse = await sut.handle(makeFakeRequest())
 
     expect(httpResponse).toEqual(serverError(new ServerError()))
+  })
+
+  test('Should return 403 if AddAccount returns null', async () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'add').mockResolvedValueOnce(null)
+
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
 
   test('Should return 200 if valid data is provided', async () => {
