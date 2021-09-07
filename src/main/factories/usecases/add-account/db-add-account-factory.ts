@@ -7,5 +7,5 @@ export const makeDbAddAccount = (): AddAccount => {
   const salt = 12
   const bcryptAdapter = new BcryptAdapter(salt)
   const accountMongoDb = new AccountMongoRepository()
-  return new DbAddAccount(bcryptAdapter, accountMongoDb)
+  return new DbAddAccount(bcryptAdapter, accountMongoDb, accountMongoDb)
 }
