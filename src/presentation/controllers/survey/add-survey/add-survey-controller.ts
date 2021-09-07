@@ -1,3 +1,4 @@
+import { badRequest } from '../../../helpers/http/http-helper'
 import {
   Controller,
   HttpRequest,
@@ -13,7 +14,11 @@ export class AddSurveyController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     const { body } = httpRequest
-    this.validation.validate(body)
+    const error = this.validation.validate(body)
+
+    if (error) {
+      return badRequest(error)
+    }
     return await Promise.resolve(ok(''))
   }
 }
