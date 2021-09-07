@@ -1,6 +1,6 @@
 
 import { AddSurveyController } from './add-survey-controller'
-import { Controller, HttpRequest, Validation } from './add-survey-protocols'
+import { HttpRequest, Validation } from './add-survey-protocols'
 
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
@@ -23,7 +23,7 @@ const makeHttpRequest = (): HttpRequest => ({
 })
 
 interface SutTypes {
-  sut: Controller
+  sut: AddSurveyController
   validationStub: Validation
 }
 
