@@ -16,10 +16,11 @@ services:
     image: node:16
     restart: always
     user: '1000'
-    command: bash -c "npm install && npm run build && npm run dev"
     working_dir: /usr/src/clean-node-api
+    tty: true
     volumes: 
       - ./:/usr/src/clean-node-api/
+      - /home/lucasleal/.ssh:/home/node/.ssh
     ports: 
       - '5050:5050'
       - '9222:9222'
